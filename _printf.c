@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 /**
  * _printf - prints anything
  * @format: the format string
@@ -23,17 +24,13 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-
-			if (format[i] == 'd' || format[i] == 'i')
-			{
-				i++;
-				x = va_arg(args, int);
-				specifier(format[i], x);
-				i++;
-			}
+			x = va_arg(args, int);
+			len += specifier(format[i], x);
+			i++;
 
 		}
 		_putchar(format[i]);
+		len++
 		i++;
 	}
 	va_end(args);

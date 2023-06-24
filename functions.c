@@ -6,20 +6,21 @@
  * Return: NA
  */
 
-void print_number(int x, int base)
+int print_number(int x, int base)
 {
-
+	int count = 1;
 
 	if (x  < base)
 	{
 		_putchar(x % base + 48);
-		return;
+		return (count);
 	}
 	else
 	{
-		print_number(x / base, base);
+		count += print_number(x / base, base);
 		_putchar(x % base + 48);
 	}
+	return (count);
 
 }
 /**
@@ -28,10 +29,13 @@ void print_number(int x, int base)
  * @x: number
  * Return: NA
  */
-void specifier(char s, int x)
+int specifier(char s, int x)
 {
+	int count = 0;
+
 	if (s == 'd' || s == 'i')
 	{
-		print_number(x, 10);
+		count += print_number(x, 10);
 	}
+	return (count - 1);
 }
