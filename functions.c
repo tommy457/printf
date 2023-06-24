@@ -80,5 +80,5 @@ int get_number(va_list args, char s)
 		count++;
 	}
 
-	return (count + 1);
+	return (count);
 }
