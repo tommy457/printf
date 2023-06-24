@@ -68,10 +68,16 @@ int get_number(va_list args, char s)
 	}
 	if (s == 'o')
 	{
+		_putchar('0');
+		_putchar('o');
+		count = count + 2;
 		count += print_number(x, 8);
 	}
 	if (s == 'b')
 	{
+		_putchar('0');
+                _putchar('x');
+                count = count + 2;
 		count += print_number(x, 2);
 	}
 	if (s == 'c')
