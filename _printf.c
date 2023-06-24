@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 /**
  * _printf - prints anything
  * @format: the format string
@@ -7,11 +6,11 @@
  * Return: number of bytes printed
  */
 
+
 int _printf(const char *format, ...)
 {
 	va_list args;
 	int i = 0, len = 0;
-	int x;
 
 
 	va_start(args, format);
@@ -24,13 +23,19 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			x = va_arg(args, int);
-			len += specifier(format[i], x);
+			if (format[i] == 's')
+			{
+
+				len += printf_str(args);
+			}
+			len += get_number(args, format[i]);
 			i++;
 
+
 		}
+
 		_putchar(format[i]);
-		len++
+		len++;
 		i++;
 	}
 	va_end(args);
