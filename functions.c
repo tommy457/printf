@@ -6,7 +6,7 @@
  * Return: NA
  */
 
-void print_number(int x, unsigned int base)
+void print_number(int x, int base)
 {
 
 
