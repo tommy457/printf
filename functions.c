@@ -126,8 +126,7 @@ int check_state(const char *fmt, va_list args)
 
 	else
 	{
-		_putchar(*fmt);
-		len++;
+		exit(EXIT_FAILURE);
 	}
 	return (len);
 }
