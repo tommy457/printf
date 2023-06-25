@@ -34,7 +34,7 @@ int check_state(const char *fmt, va_list args, int len)
 {
 	if (*fmt == 'c')
 	{
-		char x = va_arg(args, int)
+		char x = va_arg(args, int);
 
 		len += _putchar(x);
 	}
