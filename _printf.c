@@ -24,6 +24,7 @@ int _printf(const char *format, ...)
 			else
 			{
 				_putchar(*format);
+				len++;
 			}
 		}
 		else if (state == 1)
