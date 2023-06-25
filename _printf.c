@@ -23,8 +23,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				_putchar(*format);
-				len++;
+				len += _putchar(*format);
 			}
 		}
 		else if (state == 1)

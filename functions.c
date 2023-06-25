@@ -19,8 +19,7 @@ int printf_str(va_list args)
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		_putchar(str[i]);
-		len++;
+		len += _putchar(str[i]);
 	}
 	return (len);
 }
@@ -35,8 +34,9 @@ int check_state(const char *fmt, va_list args, int len)
 {
 	if (*fmt == 'c')
 	{
-		_putchar(va_arg(args, int));
-		len++;
+		char x = va_arg(args, int)
+
+		len += _putchar(x);
 	}
 	else if (*fmt == 's')
 	{
@@ -44,8 +44,7 @@ int check_state(const char *fmt, va_list args, int len)
 	}
 	else
 	{
-		_putchar(*fmt);
-		len++;
+		len += _putchar(*fmt);
 	}
 	return (len);
 }
