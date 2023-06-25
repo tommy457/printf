@@ -5,10 +5,11 @@
  *
  * Return: number of bytes printed
  */
+
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int len, state = 0;
+	int len = 0, state = 0;
 
 	va_start(args, format);
 	if (format == NULL)
@@ -23,12 +24,13 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				len += _putchar(*format);
+				_putchar(*format);
+				len++;
 			}
 		}
 		else if (state == 1)
 		{
-			len += check_state(format, args, len);
+			len += check_state(format, args);
 			state = 0;
 		}
 		format++;
