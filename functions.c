@@ -92,6 +92,7 @@ int printf_str(char *s)
 int check_state(const char *fmt, va_list args)
 {
 	int len = 0;
+	char buff[65];
 
 	if (*fmt == '%')
 	{
@@ -104,17 +105,20 @@ int check_state(const char *fmt, va_list args)
 
 		_putchar(x);
 		len++;
-
 	}
 	else if (*fmt == 'd' || *fmt == 'i')
 	{
 		int num = va_arg(args, int);
-		char buff[24];
 
 		num_to_str(num, 10, buff);
-
 		len += printf_str(buff);
+	}
+	else if (*fmt == 'b')
+	{
+		unsigned int num = va_arg(args, unsigned int);
 
+		num_to_str(num, 2, buff);
+		len += printf_str(buff);
 	}
 	else if (*fmt == 's')
 	{
@@ -122,8 +126,6 @@ int check_state(const char *fmt, va_list args)
 
 		printf_str(str);
 	}
-
-
 	else
 	{
 		exit(EXIT_FAILURE);
