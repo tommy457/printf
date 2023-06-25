@@ -17,74 +17,35 @@ int printf_str(va_list args)
 		str = "(null)";
 	}
 
-	while (str[i] != '\0')
+	for (i = 0; str[i] != '\0'; i++)
 	{
 		_putchar(str[i]);
-		i++;
 		len++;
 	}
 	return (len);
 }
-
 /**
- * print_number - ...
- * @base: number
- * @x: number
+ * check_state - ...
+ * @args: agrument
+ * @fmt: string
+ * @len: int
  * Return: int
  */
-int print_number(int x, int base)
+int check_state(const char *fmt, va_list args, int len)
 {
-	int count = 1;
-
-	if (x  < base)
+	if (*fmt == 'c')
 	{
-		_putchar(x % base + 48);
-		return (count);
+		_putchar(va_arg(args, int));
+		len++;
+	}
+	else if (*fmt == 's')
+	{
+		len += printf_str(args);
 	}
 	else
 	{
-		count += print_number(x / base, base);
-		_putchar(x % base + 48);
-
+		_putchar(*fmt);
+		len++;
 	}
-	return (count);
-
-}
-/**
- * get_number - ...
- * @args: argumet
- * @s: charecter
- * Return: int
- */
-
-int get_number(va_list args, char s)
-{
-	int count = 0;
-	int x = va_arg(args, int);
-
-	if (s == 'd' || s == 'i')
-	{
-		count += print_number(x, 10);
-	}
-	if (s == 'o')
-	{
-		_putchar('0');
-		_putchar('o');
-		count = count + 2;
-		count += print_number(x, 8);
-	}
-	if (s == 'b')
-	{
-		_putchar('0');
-                _putchar('x');
-                count = count + 2;
-		count += print_number(x, 2);
-	}
-	if (s == 'c')
-	{
-		_putchar(x);
-		count++;
-	}
-
-	return (count);
+	return (len);
 }

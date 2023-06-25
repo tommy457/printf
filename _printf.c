@@ -5,38 +5,33 @@
  *
  * Return: number of bytes printed
  */
-
-
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i = 0, len = 0;
-
+	int len, state = 0;
 
 	va_start(args, format);
-
 	if (format == NULL)
 		return (-1);
-
-	while (format && format[i] != '\0')
+	while (format && *format != '\0')
 	{
-		if (format[i] == '%')
+		if (state == 0)
 		{
-			i++;
-			if (format[i] == 's')
+			if (*format == '%')
 			{
-
-				len += printf_str(args);
+				state = 1;
 			}
-			len += get_number(args, format[i]);
-			i++;
-
-
+			else
+			{
+				_putchar(*format);
+			}
 		}
-
-		_putchar(format[i]);
-		len++;
-		i++;
+		else if (state == 1)
+		{
+			len += check_state(format, args, len);
+			state = 0;
+		}
+		format++;
 	}
 	va_end(args);
 	return (len);
