@@ -20,6 +20,48 @@ int printf_str(char *s)
 	return (len);
 }
 /**
+ * print_S - prints string
+ * @args: agrument
+ * @buf: buffer
+ * Return: int
+ */
+int print_S(va_list args, char buf[])
+{
+	int i, len = 0, j;
+	char *str = va_arg(args, char *);
+
+	if (str == NULL)
+	{
+		str = "(null)";
+	}
+	for (i = 0; str[i]; i++)
+	{
+		if ((str[i] > 0 && str[i] < 32) || str[i] >= 127)
+		{
+			len += _putchar('\\');
+			len += _putchar('x');
+			unnum_2_str(str[i], 16, buf);
+
+			if (!buf[1])
+				len += _putchar('0');
+
+			for (j = 0; buf[j]; j++)
+			{
+				if (buf[j] >= 'a' || buf[j] >= 'z')
+				{
+					buf[j] -= 32;
+				}
+			}
+			len += printf_str(buf);
+		}
+		else
+		{
+			len += _putchar(str[i]);
+		}
+	}
+	return (len);
+}
+/**
  * print_c - prints character
  * @args: argument
  * @buf: buffer

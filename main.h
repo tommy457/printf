@@ -33,5 +33,5 @@ int print_int(va_list args, char buf[]);
 int print_pointer(va_list args, char buf[]);
 int print_s(va_list args, char buf[]);
 int print_c(va_list args, char buf[]);
-
+int print_S(va_list args, char buf[]);
 #endif
