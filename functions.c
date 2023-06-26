@@ -1,67 +1,5 @@
 #include "main.h"
-/**
- * unnum_2_str - convert unsinged num to string.
- * @number: number to be converted.
- * @base: base to be converted from.
- * @bufer: array to store the string
- * Return: NA
- */
-void unnum_2_str(int number, int base, char *bufer)
-{
-	char buf[65];
-	int i, j = 0;
 
-	if (number == 0)
-	{
-		*bufer++ = '0';
-		*bufer = 0;
-		return;
-	}
-
-	for (i = 0; i < 65; i++)
-	{
-		buf[i] = 0;
-	}
-
-	while (number)
-	{
-		int num = number % base;
-
-		if (num >= 10)
-		{
-			buf[j++] = 'a' + (num - 10);
-		}
-		else
-		{
-			buf[j++] = '0' + num;
-
-		}
-		number /= base;
-	}
-	for (i = j - 1; i != 0; i--)
-	{
-		*bufer++ = buf[i];
-	}
-	*bufer++ = buf[0];
-	*bufer = 0;
-}
-/**
- * num_to_str - convert singed num to string.
- * @num: number to be converted.
- * @base: base to be converted from.
- * @buf: array to store the string
- * Return: NA
- */
-void num_to_str(int num, int base, char *buf)
-{
-	if (num < 0)
-	{
-		*buf++ = '-';
-		num = -num;
-	}
-	unnum_2_str(num, base, buf);
-
-}
 /**
  * printf_str - prints string
  * @s: string
@@ -75,7 +13,6 @@ int printf_str(char *s)
 	{
 		s = "(null)";
 	}
-
 	for (i = 0; s[i]; i++)
 	{
 		_putchar(s[i]);
@@ -84,6 +21,23 @@ int printf_str(char *s)
 	return (len);
 }
 /**
+ * print_c - prints character
+ * @args: argument
+ * @buf: buffer
+ * Return: int
+ */
+
+int print_c(va_list args, __attribute__ ((unused)) char buf[])
+{
+	char str = va_arg(args, int), len = 0;
+
+	_putchar(str);
+	len++;
+
+	return (len);
+}
+
+/**
  * check_state - ...
  * @args: agrument
  * @fmt: string
@@ -91,44 +45,38 @@ int printf_str(char *s)
  */
 int check_state(const char *fmt, va_list args)
 {
-	int len = 0;
+	int len = 0, i;
 	char buff[65];
 
-	if (*fmt == '%')
+	cases specs[] = {
+		{'s', print_s},
+		{'c', print_c},
+		{'d', print_int},
+		{'i', print_int},
+		{'p', print_pointer},
+		{'o', print_octal_int},
+		{'b', print_binary_int},
+		{'u', print_unsined_int},
+		{'x', print_hex_int_lower},
+		{'X', print_hex_int_upper},
+		{'\0', NULL},
+	};
+	if (*fmt != '%')
+	{
+		for (i = 0; specs[i].spec != '\0'; i++)
+		{
+			if (*fmt == specs[i].spec)
+				len += specs[i].f(args, buff);
+		}
+	}
+	else if (*fmt == '%')
 	{
 		_putchar('%');
 		len++;
 	}
-	else if (*fmt == 'c')
-	{
-		char x = va_arg(args, int);
-
-		_putchar(x);
-		len++;
-	}
-	else if (*fmt == 'd' || *fmt == 'i')
-	{
-		int num = va_arg(args, int);
-
-		num_to_str(num, 10, buff);
-		len += printf_str(buff);
-	}
-	else if (*fmt == 'b')
-	{
-		unsigned int num = va_arg(args, unsigned int);
-
-		num_to_str(num, 2, buff);
-		len += printf_str(buff);
-	}
-	else if (*fmt == 's')
-	{
-		char *str = va_arg(args, char *);
-
-		printf_str(str);
-	}
 	else
 	{
-		exit(EXIT_FAILURE);
+		exit(-1);
 	}
 	return (len);
 }
