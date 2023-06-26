@@ -99,6 +99,7 @@ int check_state(const char *fmt, va_list args)
 		{'u', print_unsined_int},
 		{'x', print_hex_int_lower},
 		{'X', print_hex_int_upper},
+		{'S', print_S},
 		{'\0', NULL},
 	};
 	if (*fmt != '%')
