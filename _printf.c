@@ -24,8 +24,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				_putchar(*format);
-				len++;
+				len += _putchar(*format);
 			}
 		}
 		else if (state == 1)
@@ -36,5 +35,6 @@ int _printf(const char *format, ...)
 		format++;
 	}
 	va_end(args);
+	_putchar(-1);
 	return (len);
 }

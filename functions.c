@@ -15,8 +15,7 @@ int printf_str(char *s)
 	}
 	for (i = 0; s[i]; i++)
 	{
-		_putchar(s[i]);
-		len++;
+		len += _putchar(s[i]);
 	}
 	return (len);
 }
@@ -31,8 +30,7 @@ int print_c(va_list args, __attribute__ ((unused)) char buf[])
 {
 	char str = va_arg(args, int), len = 0;
 
-	_putchar(str);
-	len++;
+	len += _putchar(str);
 
 	return (len);
 }
@@ -71,8 +69,7 @@ int check_state(const char *fmt, va_list args)
 	}
 	else if (*fmt == '%')
 	{
-		_putchar('%');
-		len++;
+		len += _putchar('%');
 	}
 	else
 	{
