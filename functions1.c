@@ -74,11 +74,20 @@ int print_pointer(va_list args, char buf[])
 {
 	void *ptr = va_arg(args, void *);
 	int len = 0;
+	char null[] = "(nil)";
 
-	unnum_2_str((uint64_t) ptr, 16, buf);
-	_putchar('0');
-	_putchar('x');
-	len += 2;
-	len += printf_str(buf);
+	if (ptr == NULL)
+	{
+		len += printf_str(null);
+	}
+	else
+	{
+		unnum_2_str((uint64_t) ptr, 16, buf);
+		_putchar('0');
+		_putchar('x');
+		len += 2;
+		len += printf_str(buf);
+	}
+
 	return (len);
 }
